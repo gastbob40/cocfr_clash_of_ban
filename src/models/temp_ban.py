@@ -1,7 +1,5 @@
 import datetime
-
 import yaml
-
 from src.utils.api_manager import APIManager
 
 with open("run/config/config.yml", 'r') as stream:
