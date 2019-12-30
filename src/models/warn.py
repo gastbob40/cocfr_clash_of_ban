@@ -20,6 +20,10 @@ class Warn:
     reason: str
 
     def __init__(self, **kwargs):
+        """
+        Init of the class
+        :param kwargs: a warn from the api
+        """
         if 'data' in kwargs:
             self.id = int(kwargs['data']['id'])
             self.user_id = int(kwargs['data']['user_id'])
@@ -49,3 +53,7 @@ class Warn:
                                          moderator_id=str(self.moderator_id),
                                          time=self.time.strftime('%Y-%m-%dT%H:%M:%SZ'),
                                          reason=self.reason)
+
+    def delete(self):
+        state, r = api_manager.delete_data('warns',
+                                           self.id)
