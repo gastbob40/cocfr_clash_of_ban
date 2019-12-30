@@ -4,8 +4,9 @@ import yaml
 
 class APIManager:
 
-    def __init__(self, base_url: str):
+    def __init__(self, base_url: str, token: str):
         self.base_url = base_url
+        self.token = token
 
     def get_data(self, type: str, **filters):
         headers = self.get_headers()
@@ -41,12 +42,18 @@ class APIManager:
         else:
             return True, r.json()
 
-    @staticmethod
-    def get_headers():
-        with open('run/config/tokens.yml', 'r') as file:
-            token = yaml.safe_load(file)['epimodo_website_token']
+    def delete_data(self, type, id):
+        headers = self.get_headers()
 
+        r = requests.delete(self.base_url + type + '/' + str(id) + '/', headers=headers)
+
+        if not r.ok:
+            return False, r.reason
+        else:
+            return True, r.json()
+
+    def get_headers(self):
         return {
             'content-type': 'application/json',
-            'Authorization': f'Token {token}'
+            'Authorization': f'Token {self.token}'
         }
