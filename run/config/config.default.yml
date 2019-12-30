@@ -1,0 +1,9 @@
+bot:
+  prefix: '?'
+  token: ''
+
+owner_id: 0
+
+api:
+  url: ''
+  token: ''
