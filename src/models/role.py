@@ -23,7 +23,7 @@ class Role:
         if 'data' in kwargs:
             self.id = int(kwargs['data']['id'])
             self.slug = kwargs['data']['slug']
-            self.role_id = int(kwargs['data']['message'])
+            self.role_id = int(kwargs['data']['role_id'])
         else:
             self.id = -1
             self.slug = "command"

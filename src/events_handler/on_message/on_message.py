@@ -5,6 +5,9 @@ import yaml
 from src.events_handler.on_message.setup.load_custom_commands import load_custom_commands
 from src.events_handler.on_message.setup.load_roles import load_roles
 
+# MODERATION PART
+from src.events_handler.on_message.moderation.warn_member import warn_member
+
 
 class OnMessage:
 
@@ -25,8 +28,12 @@ class OnMessage:
         command = message.content.split(' ')[0][1:]
         args = message.content.split(' ')[1:]
 
+        # Owner command
         if command == 'load_roles':
-            await load_roles(client, message, config)
-
+            await load_roles(client, message, args, config)
         elif command == 'load_commands':
-            await load_custom_commands(client, message, config)
+            await load_custom_commands(client, message, args, config)
+
+        # Moderator command
+        elif command in ['av', 'avertissement']:
+            await warn_member(client, message, args, config)
