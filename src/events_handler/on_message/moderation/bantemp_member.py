@@ -2,7 +2,9 @@ from datetime import timedelta
 from typing import List
 
 import discord
+import yaml
 
+from src.models.role import Role
 from src.models.temp_ban import TempBan
 from src.utils.api_manager import APIManager
 from src.utils.embeds_manager import EmbedsManager
@@ -99,3 +101,12 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
             .add_field(name="Durée :", value=delta, inline=True)
             .add_field(name="Auteur :", value=message.author.display_name, inline=True)
     )
+
+    with open("src/_data/roles.yml", 'r') as stream:
+        roles = yaml.safe_load(stream)
+
+    role = [Role(data=x) for x in roles if x['slug'].startswith('ban')]
+
+    for r in role:
+        await target.add_roles(message.guild.get_role(r.role_id),
+                               reason=f"Bantemp pour {bantemp.reason} pour une durée de {delta}")
