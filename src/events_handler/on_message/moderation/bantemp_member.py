@@ -74,7 +74,7 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
             .add_field(name="Rappel :",
                        value="Sachez que plusieurs BanTemp peuvent conduire à un Bannissement définitif du serveur!\n\n"
-                             f"Pour évitez cela, prenez connaissance des {client.get_channel('280735672527224842')} qui ne"
+                             f"Pour évitez cela, prenez connaissance des {client.get_channel(280735672527224842).mention} qui ne"
                              f" sont pas nombreuses mais importantes pour le bon fonctionnement du serveur.",
                        inline=False)
             .add_field(name="Raison :", value=bantemp.reason, inline=True)
