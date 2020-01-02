@@ -18,4 +18,9 @@ async def on_message(message):
     await EventsHandler.handle_on_message(client, message)
 
 
+@client.event
+async def on_member_join(member):
+    await EventsHandler.handle_on_member_join(client, member)
+
+
 client.run(data['bot']['token'])

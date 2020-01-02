@@ -40,3 +40,13 @@ class EmbedsManager:
         embed.description = content
 
         return embed
+
+    @staticmethod
+    def secret_embed(title):
+        embed = discord.Embed(color=0x0000) \
+            .set_author(icon_url="https://f-scope.net/images600_/eyes-emoji-png.png",
+                        name=title)
+
+        embed.timestamp = datetime.now() - timedelta(hours=1)
+
+        return embed

@@ -86,7 +86,7 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
     await client.get_channel(config['channels']['log_reactions']).send(
         embed=EmbedsManager.sanction_embed(
             f"Bannissement temporaire du membre {target.display_name} pour une durée de {delta}.",
-            f"Il a été averti pour : `{bantemp.reason}`.")
+            f"Il a été bantemp pour : `{bantemp.reason}`.")
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
             .add_field(name="Durée :", value=delta, inline=True)
             .add_field(name="Auteur :", value=message.author.display_name, inline=True)
