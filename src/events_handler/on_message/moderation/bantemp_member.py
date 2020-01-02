@@ -102,6 +102,8 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
             .add_field(name="Auteur :", value=message.author.display_name, inline=True)
     )
 
+    # Add roles
+
     with open("src/_data/roles.yml", 'r') as stream:
         roles = yaml.safe_load(stream)
 
@@ -110,3 +112,14 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
     for r in role:
         await target.add_roles(message.guild.get_role(r.role_id),
                                reason=f"Bantemp pour {bantemp.reason} pour une durée de {delta}")
+
+    for channel in message.guild.channels:
+        try:
+            if target.permissions_in(channel).read_messages:
+                await channel.set_permissions(target,
+                                              send_messages=False)
+            if target.permissions_in(channel).connect:
+                await channel.set_permissions(target,
+                                              connect=False)
+        except:
+            pass
