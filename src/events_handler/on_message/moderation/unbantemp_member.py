@@ -77,7 +77,7 @@ async def unbantemp_member(client: discord.Client, message: discord.Message, arg
 
     await target.send(
         embed=EmbedsManager.sanction_embed(
-            "Un modérateur vient de retirer votre bantemp."
+            f"{message.author.display_name} vient de retirer votre bantemp."
         )
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
     )
