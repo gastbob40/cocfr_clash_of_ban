@@ -1,11 +1,12 @@
 from datetime import datetime, timedelta
+
 import discord
 
 
 class EmbedsManager:
     @staticmethod
     def complete_embed(title, content):
-        embed = discord.Embed(color=0x19D773)\
+        embed = discord.Embed(color=0x19D773) \
             .set_author(icon_url="https://cdn0.iconfinder.com/data/icons/shift-free/32/Complete_Symbol-512.png",
                         name=title)
         embed.timestamp = datetime.now() - timedelta(hours=1)
@@ -31,13 +32,15 @@ class EmbedsManager:
         return embed
 
     @staticmethod
-    def sanction_embed(title, content):
+    def sanction_embed(title, content=None):
         embed = discord.Embed(color=0x0000) \
             .set_author(icon_url="https://cdn0.iconfinder.com/data/icons/tools-icons-rounded/110/Hammer-512.png",
                         name=title)
 
         embed.timestamp = datetime.now() - timedelta(hours=1)
-        embed.description = content
+
+        if content != None:
+            embed.description = content
 
         return embed
 

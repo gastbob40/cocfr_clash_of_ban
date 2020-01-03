@@ -8,6 +8,8 @@ from src.events_handler.on_message.setup.load_roles import load_roles
 # MODERATION PART
 from src.events_handler.on_message.moderation.warn_member import warn_member
 from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
+from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
+
 
 class OnMessage:
 
@@ -39,3 +41,5 @@ class OnMessage:
             await warn_member(client, message, args, config)
         elif command in ['bt', 'bantemp']:
             await bantemp_member(client, message, args, config)
+        elif command in ['eb', 'enleverban']:
+            await unbantemp_member(client, message, args, config)
