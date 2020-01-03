@@ -9,6 +9,7 @@ from src.events_handler.on_message.setup.load_roles import load_roles
 from src.events_handler.on_message.moderation.warn_member import warn_member
 from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
 from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
+from src.events_handler.on_message.update.update import Update
 
 
 class OnMessage:
@@ -23,6 +24,8 @@ class OnMessage:
             config = yaml.safe_load(stream)
 
         prefix = config['bot']['prefix']
+
+        await Update.handle(client, message, config)
 
         if not message.content or not message.content.startswith(prefix):
             return
