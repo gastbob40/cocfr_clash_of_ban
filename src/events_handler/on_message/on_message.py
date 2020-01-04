@@ -14,6 +14,7 @@ from src.events_handler.on_message.update.update import Update
 # PUBLIC PART
 from src.events_handler.on_message.miscs.commands_list import commands_list
 from src.events_handler.on_message.miscs.change_nick import change_nick
+from src.events_handler.on_message.miscs.mention_moderator import mention_moderator
 
 
 class OnMessage:
@@ -28,6 +29,9 @@ class OnMessage:
             config = yaml.safe_load(stream)
 
         prefix = config['bot']['prefix']
+
+        if message.role_mentions:
+            await mention_moderator(client, message, config)
 
         await Update.handle(client, message, config)
 
