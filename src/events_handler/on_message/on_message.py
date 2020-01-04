@@ -11,6 +11,9 @@ from src.events_handler.on_message.moderation.bantemp_member import bantemp_memb
 from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
 from src.events_handler.on_message.update.update import Update
 
+# PUBLIC PART
+from src.events_handler.on_message.miscs.commands_list import commands_list
+
 
 class OnMessage:
 
@@ -46,3 +49,8 @@ class OnMessage:
             await bantemp_member(client, message, args, config)
         elif command in ['eb', 'enleverban']:
             await unbantemp_member(client, message, args, config)
+
+
+        # Public command
+        elif command in ['co', 'commandes']:
+            await commands_list(client, message, args, config)
