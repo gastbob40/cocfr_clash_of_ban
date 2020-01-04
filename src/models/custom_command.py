@@ -23,7 +23,7 @@ class CustomCommand:
         """
         if 'data' in kwargs:
             self.id = int(kwargs['data']['id'])
-            self.trigger = kwargs['data']['user_id']
+            self.trigger = kwargs['data']['trigger']
             self.message = kwargs['data']['message']
             self.is_active = kwargs['data']['is_active']
         else:

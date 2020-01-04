@@ -1,20 +1,22 @@
+from typing import List
+
 import discord
 import yaml
 
+from src.events_handler.on_message.miscs.change_nick import change_nick
+# PUBLIC PART
+from src.events_handler.on_message.miscs.commands_list import commands_list
+from src.events_handler.on_message.miscs.mention_moderator import mention_moderator
+from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
+from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
+# MODERATION PART
+from src.events_handler.on_message.moderation.warn_member import warn_member
 # SETUP PART
 from src.events_handler.on_message.setup.load_custom_commands import load_custom_commands
 from src.events_handler.on_message.setup.load_roles import load_roles
-
-# MODERATION PART
-from src.events_handler.on_message.moderation.warn_member import warn_member
-from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
-from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
 from src.events_handler.on_message.update.update import Update
-
-# PUBLIC PART
-from src.events_handler.on_message.miscs.commands_list import commands_list
-from src.events_handler.on_message.miscs.change_nick import change_nick
-from src.events_handler.on_message.miscs.mention_moderator import mention_moderator
+# MODELS
+from src.models.custom_command import CustomCommand
 
 
 class OnMessage:
@@ -60,3 +62,14 @@ class OnMessage:
             await commands_list(client, message, args, config)
         elif command in ['cn', 'change_nick']:
             await change_nick(client, message, args, config)
+
+        else:
+            with open("src/_data/custom_commands.yml", 'r') as stream:
+                custom_commands = [CustomCommand(data=x) for x in yaml.safe_load(stream)]
+
+            custom_command: List[CustomCommand] = [x for x in custom_commands if x.trigger == command]
+
+            if custom_command and custom_command[0].is_active:
+                await message.channel.send(
+                    custom_command[0].message
+                )
