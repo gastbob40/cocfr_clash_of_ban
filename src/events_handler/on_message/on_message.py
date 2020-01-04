@@ -13,6 +13,7 @@ from src.events_handler.on_message.update.update import Update
 
 # PUBLIC PART
 from src.events_handler.on_message.miscs.commands_list import commands_list
+from src.events_handler.on_message.miscs.change_nick import change_nick
 
 
 class OnMessage:
@@ -50,7 +51,8 @@ class OnMessage:
         elif command in ['eb', 'enleverban']:
             await unbantemp_member(client, message, args, config)
 
-
         # Public command
         elif command in ['co', 'commandes']:
             await commands_list(client, message, args, config)
+        elif command in ['cn', 'change_nick']:
+            await change_nick(client, message, args, config)

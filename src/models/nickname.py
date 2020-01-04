@@ -53,3 +53,6 @@ class Nickname:
     def delete(self):
         state, r = api_manager.delete_data('nicknames',
                                            self.id)
+
+    def __str__(self):
+        return f'{self.user_id} - {self.nickname} - {self.time.strftime("%Y-%m-%dT%H:%M:%SZ")}'
