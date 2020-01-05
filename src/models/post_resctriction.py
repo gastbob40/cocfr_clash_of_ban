@@ -26,8 +26,8 @@ class PostRestriction:
             self.id = int(kwargs['data']['id'])
             self.user_id = int(kwargs['data']['user_id'])
             self.channel_id = int(kwargs['data']['channel_id'])
-            self.start_time = datetime.datetime.strptime(kwargs['data']['start_time'], '%Y-%m-%dT%H:%M:%SZ')
-            self.end_time = datetime.datetime.strptime(kwargs['data']['end_time'], '%Y-%m-%dT%H:%M:%SZ')
+            self.start_time = datetime.datetime.strptime(kwargs['data']['start_time'], '%Y-%m-%dT%H:%M:%S')
+            self.end_time = datetime.datetime.strptime(kwargs['data']['end_time'], '%Y-%m-%dT%H:%M:%S')
         else:
             self.id = -1
             self.user_id = -1
@@ -39,8 +39,8 @@ class PostRestriction:
         state, r = api_manager.post_data('post-restrictions',
                                          user_id=str(self.user_id),
                                          channel_id=str(self.channel_id),
-                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
-                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'))
+                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%S'),
+                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%S'))
         if state:
             self.id = r['id']
 
@@ -49,8 +49,8 @@ class PostRestriction:
                                          self.id,
                                          user_id=str(self.user_id),
                                          channel_id=str(self.channel_id),
-                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
-                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'))
+                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%S'),
+                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%S'))
 
     def delete(self):
         state, r = api_manager.delete_data('post-restrictions',

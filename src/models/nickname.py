@@ -27,7 +27,7 @@ class Nickname:
             self.id = int(kwargs['data']['id'])
             self.user_id = int(kwargs['data']['user_id'])
             self.nickname = kwargs['data']['nickname']
-            self.time = datetime.datetime.strptime(kwargs['data']['time'], '%Y-%m-%dT%H:%M:%SZ')
+            self.time = datetime.datetime.strptime(kwargs['data']['time'], '%Y-%m-%dT%H:%M:%S')
         else:
             self.id = -1
             self.user_id = -1
@@ -38,7 +38,7 @@ class Nickname:
         state, r = api_manager.post_data('nicknames',
                                          user_id=str(self.user_id),
                                          nickname=self.nickname,
-                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%SZ'))
+                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%S'))
 
         if state:
             self.id = r['id']
@@ -48,7 +48,7 @@ class Nickname:
                                          self.id,
                                          user_id=str(self.user_id),
                                          nickname=self.nickname,
-                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%SZ'))
+                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%S'))
 
     def delete(self):
         state, r = api_manager.delete_data('nicknames',

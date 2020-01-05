@@ -27,8 +27,8 @@ class Donation:
             self.id = int(kwargs['data']['id'])
             self.user_id = int(kwargs['data']['user_id'])
             self.amount = int(kwargs['data']['amount'])
-            self.start_time = datetime.datetime.strptime(kwargs['data']['start_time'], '%Y-%m-%dT%H:%M:%SZ')
-            self.end_time = datetime.datetime.strptime(kwargs['data']['end_time'], '%Y-%m-%dT%H:%M:%SZ')
+            self.start_time = datetime.datetime.strptime(kwargs['data']['start_time'], '%Y-%m-%dT%H:%M:%S')
+            self.end_time = datetime.datetime.strptime(kwargs['data']['end_time'], '%Y-%m-%dT%H:%M:%S')
             self.is_active = kwargs['data']['is_active']
         else:
             self.id = -1
@@ -42,8 +42,8 @@ class Donation:
         state, r = api_manager.post_data('donations',
                                          user_id=str(self.user_id),
                                          amount=self.amount,
-                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
-                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%S'),
+                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%S'),
                                          is_active=self.is_active)
         if state:
             self.id = r['id']
@@ -53,8 +53,8 @@ class Donation:
                                          self.id,
                                          user_id=str(self.user_id),
                                          amount=self.amount,
-                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
-                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%S'),
+                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%S'),
                                          is_active=self.is_active)
 
     def delete(self):

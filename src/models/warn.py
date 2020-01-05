@@ -28,7 +28,7 @@ class Warn:
             self.id = int(kwargs['data']['id'])
             self.user_id = int(kwargs['data']['user_id'])
             self.moderator_id = int(kwargs['data']['moderator_id'])
-            self.time = datetime.datetime.strptime(kwargs['data']['time'], '%Y-%m-%dT%H:%M:%SZ')
+            self.time = datetime.datetime.strptime(kwargs['data']['time'], '%Y-%m-%dT%H:%M:%S')
             self.reason = kwargs['data']['reason']
         else:
             self.id = -1
@@ -41,7 +41,7 @@ class Warn:
         state, r = api_manager.post_data('warns',
                                          user_id=str(self.user_id),
                                          moderator_id=str(self.moderator_id),
-                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%S'),
                                          reason=self.reason)
         if state:
             self.id = r['id']
@@ -51,7 +51,7 @@ class Warn:
                                          self.id,
                                          user_id=str(self.user_id),
                                          moderator_id=str(self.moderator_id),
-                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                         time=self.time.strftime('%Y-%m-%dT%H:%M:%S'),
                                          reason=self.reason)
 
     def delete(self):

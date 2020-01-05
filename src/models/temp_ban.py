@@ -28,8 +28,8 @@ class TempBan:
             self.id = int(kwargs['data']['id'])
             self.user_id = int(kwargs['data']['user_id'])
             self.moderator_id = int(kwargs['data']['moderator_id'])
-            self.start_time = datetime.datetime.strptime(kwargs['data']['start_time'], '%Y-%m-%dT%H:%M:%SZ')
-            self.end_time = datetime.datetime.strptime(kwargs['data']['end_time'], '%Y-%m-%dT%H:%M:%SZ')
+            self.start_time = datetime.datetime.strptime(kwargs['data']['start_time'], '%Y-%m-%dT%H:%M:%S')
+            self.end_time = datetime.datetime.strptime(kwargs['data']['end_time'], '%Y-%m-%dT%H:%M:%S')
             self.reason = kwargs['data']['reason']
             self.is_active = kwargs['data']['is_active']
         else:
@@ -45,8 +45,8 @@ class TempBan:
         state, r = api_manager.post_data('temp-bans',
                                          user_id=str(self.user_id),
                                          moderator_id=str(self.moderator_id),
-                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
-                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%S'),
+                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%S'),
                                          reason=self.reason,
                                          is_active=self.is_active)
         if state:
@@ -57,8 +57,8 @@ class TempBan:
                                          self.id,
                                          user_id=str(self.user_id),
                                          moderator_id=str(self.moderator_id),
-                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
-                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
+                                         start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%S'),
+                                         end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%S'),
                                          reason=self.reason,
                                          is_active=self.is_active)
 

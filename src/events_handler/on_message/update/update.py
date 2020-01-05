@@ -12,20 +12,24 @@ class Update:
 
     @staticmethod
     async def handle(client: discord.Client, message: discord.Message, config):
-        last_update = datetime.datetime.strptime(config['update']['last_update'], '%Y-%m-%dT%H:%M:%SZ')
+        last_update = datetime.datetime.strptime(config['update']['last_update'], '%Y-%m-%dT%H:%M:%S')
         now = datetime.datetime.now()
 
         if last_update + datetime.timedelta(minutes=int(config['update']['time_between_update'])) > now:
             return
 
-        config['update']['last_update'] = now.strftime('%Y-%m-%dT%H:%M:%SZ')
+        config['update']['last_update'] = now.strftime('%Y-%m-%dT%H:%M:%S')
 
         with open('run/config/config.yml', 'w') as file:
             documents = yaml.dump(config, file, sort_keys=True)
 
         api_manager = APIManager(config['api']['url'], config['api']['token'])
-
-        state, res = api_manager.get_data('updates')
+        now = datetime.datetime.now()
+        state, res = api_manager.get_data(
+            'temp-bans',
+            is_active=True,
+            end_time__lte=now.strftime('%Y-%m-%dT%H:%M:%S')
+        )
 
         if not state:
             return
@@ -35,5 +39,5 @@ class Update:
 
         role = [Role(data=x) for x in roles if x['slug'].startswith('ban')]
 
-        for bt in res['TempBan']:
+        for bt in res:
             await update_bantemp(client, message, TempBan(data=bt), role, config)
