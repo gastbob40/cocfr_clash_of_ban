@@ -81,6 +81,9 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
                        inline=False)
             .add_field(name="Raison :", value=bantemp.reason, inline=True)
             .add_field(name="Durée :", value=delta, inline=True)
+            .set_image(
+            url='https://cdn.discordapp.com/attachments/377179445640822784/663478346763599872/photostudio_15295854416791.png'
+        )
     )
 
     await client.get_channel(config['channels']['log_reactions']).send(
@@ -98,9 +101,7 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
             f"Vous venez d'être bantemp pour : `{bantemp.reason}`.\n\n"
             f"Sachez que plusieurs bans temporaires conduisent à un ban définitif.")
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
-            .set_image(
-            url='https://cdn.discordapp.com/attachments/377179445640822784/663478346763599872/photostudio_15295854416791.png'
-        )
+
             .add_field(name="Durée :", value=delta, inline=True)
             .add_field(name="Auteur :", value=message.author.display_name, inline=True)
     )
