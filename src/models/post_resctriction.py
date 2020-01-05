@@ -25,7 +25,7 @@ class PostRestriction:
         if 'data' in kwargs:
             self.id = int(kwargs['data']['id'])
             self.user_id = int(kwargs['data']['user_id'])
-            self.channel_id = int(kwargs['data']['amount'])
+            self.channel_id = int(kwargs['data']['channel_id'])
             self.start_time = datetime.datetime.strptime(kwargs['data']['start_time'], '%Y-%m-%dT%H:%M:%SZ')
             self.end_time = datetime.datetime.strptime(kwargs['data']['end_time'], '%Y-%m-%dT%H:%M:%SZ')
         else:
@@ -38,7 +38,7 @@ class PostRestriction:
     def save(self):
         state, r = api_manager.post_data('post-restrictions',
                                          user_id=str(self.user_id),
-                                         channel_id=str(self.amount),
+                                         channel_id=str(self.channel_id),
                                          start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
                                          end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'))
         if state:
@@ -48,7 +48,7 @@ class PostRestriction:
         state, r = api_manager.edit_data('post-restrictions',
                                          self.id,
                                          user_id=str(self.user_id),
-                                         channel_id=str(self.amount),
+                                         channel_id=str(self.channel_id),
                                          start_time=self.start_time.strftime('%Y-%m-%dT%H:%M:%SZ'),
                                          end_time=self.end_time.strftime('%Y-%m-%dT%H:%M:%SZ'))
 
