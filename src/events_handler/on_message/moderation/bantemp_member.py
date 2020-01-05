@@ -99,8 +99,7 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
             f"Sachez que plusieurs bans temporaires conduisent à un ban définitif.")
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
             .set_thumbnail(
-            url='https://cdn.discordapp.com/attachments/377179445640822784/459339462711705601/photostudio_'
-                '1529585441679.png')
+            url='https://cdn.discordapp.com/attachments/377179445640822784/459339462711705601/photostudio_1529585441679.png')
             .add_field(name="Durée :", value=delta, inline=True)
             .add_field(name="Auteur :", value=message.author.display_name, inline=True)
     )
