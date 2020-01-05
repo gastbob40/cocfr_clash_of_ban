@@ -5,13 +5,14 @@ import discord
 from src.models.post_resctriction import PostRestriction
 from src.utils.api_manager import APIManager
 from src.utils.embeds_manager import EmbedsManager
+from src.utils.permissions import PermissionChecker
 
 
 async def verify_post(client: discord.Client, message: discord.Message, config):
     api_manager = APIManager(config['api']['url'], config['api']['token'])
 
-    # if PermissionChecker.is_moderator(message.author):
-    #     return
+    if PermissionChecker.is_moderator(message.author):
+        return
 
     state, res = api_manager.get_data(
         'post-restrictions',
