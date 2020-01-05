@@ -2,9 +2,11 @@ from typing import List
 
 import discord
 
+from src.utils.embeds_manager import EmbedsManager
+
 
 async def commands_list(client: discord.Client, message: discord.Message, args: List[str], config):
-    await message.channel.send(
+    await message.author.send(
         embed=discord.Embed(color=0xFFFFFF)
             .set_author(
             icon_url='https://cdn.mee6.xyz/assets/logo.png',
@@ -30,7 +32,7 @@ async def commands_list(client: discord.Client, message: discord.Message, args: 
         )
     )
 
-    await message.channel.send(
+    await message.author.send(
         embed=discord.Embed(color=0xFFFFFF)
             .set_author(
             icon_url='https://images.emojiterra.com/google/android-10/512px/1f382.png',
@@ -49,7 +51,7 @@ async def commands_list(client: discord.Client, message: discord.Message, args: 
         )
     )
 
-    await message.channel.send(
+    await message.author.send(
         embed=discord.Embed(color=0xFFFFFF)
             .set_author(
             icon_url='https://img.utdstc.com/icons/clash-of-clans-android.png:l',
@@ -93,7 +95,7 @@ async def commands_list(client: discord.Client, message: discord.Message, args: 
         )
     )
 
-    await message.channel.send(
+    await message.author.send(
         embed=discord.Embed(color=0xFFFFFF)
             .set_author(
             icon_url='https://images.emojiterra.com/google/android-10/512px/1f3b6.png',
@@ -137,7 +139,7 @@ async def commands_list(client: discord.Client, message: discord.Message, args: 
         )
     )
 
-    await message.channel.send(
+    await message.author.send(
         embed=discord.Embed(color=0xFFFFFF)
             .set_author(
             icon_url='https://i.pinimg.com/originals/90/fa/0b/90fa0bddac5ce0d9b0d9a4569195bbdd.png',
@@ -163,5 +165,12 @@ async def commands_list(client: discord.Client, message: discord.Message, args: 
             name="!leave",
             value="Permet de faire quitter le bot",
             inline=False
+        )
+    )
+
+    await message.channel.send(
+        embed=EmbedsManager.complete_embed(
+            "Les commandes vous ont été envoyé en message privé."
+            ""
         )
     )
