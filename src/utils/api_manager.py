@@ -50,7 +50,7 @@ class APIManager:
         if not r.ok:
             return False, r.reason
         else:
-            return True, r.json()
+            return True, "Ok"
 
     def get_headers(self):
         return {
