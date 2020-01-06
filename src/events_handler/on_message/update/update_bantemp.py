@@ -12,6 +12,7 @@ async def update_bantemp(client: discord.Client, message: discord.Message, bante
     bantemp.is_active = False
 
     if not target:
+        bantemp.update()
         return
 
     # Remove Roles
@@ -33,12 +34,15 @@ async def update_bantemp(client: discord.Client, message: discord.Message, bante
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
     )
 
-    await target.send(
-        embed=EmbedsManager.sanction_embed(
-            f"Votre bantemp vient de finir."
+    try:
+        await target.send(
+            embed=EmbedsManager.sanction_embed(
+                f"Votre bantemp vient de finir."
+            )
+            .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
         )
-        .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
-    )
+    except:
+        pass
 
     bantemp.update()
 
