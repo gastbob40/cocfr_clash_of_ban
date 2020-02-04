@@ -28,4 +28,8 @@ async def on_raw_reaction_add(payload):
     await EventsHandler.handle_on_reaction_add(client, payload)
 
 
+@client.event
+async def on_message_edit(before, after):
+    await EventsHandler.handle_on_message_edit(before, after)
+
 client.run(data['bot']['token'])
