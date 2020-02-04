@@ -52,7 +52,7 @@ async def change_nick(client: discord.Client, message: discord.Message, args: Li
     now = datetime.datetime.now()
 
     # He can't change
-    if nicknames and nicknames[0].time < now + datetime.timedelta(days=7):
+    if nicknames and nicknames[0].time + datetime.timedelta(days=7) > now:
         new_date = nicknames[0].time + datetime.timedelta(days=7)
         return await message.channel.send(
             embed=EmbedsManager.error_embed("Vous avez changé votre pseudo il y a moins de 1 semaine.\n\n"
