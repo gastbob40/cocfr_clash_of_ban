@@ -6,6 +6,7 @@ import yaml
 from src.events_handler.on_message.miscs.change_nick import change_nick
 from src.events_handler.on_message.miscs.commands_list import commands_list
 from src.events_handler.on_message.miscs.donation_ask import donation_ask
+from src.events_handler.on_message.miscs.log_message import log_message
 from src.events_handler.on_message.miscs.mention_moderator import mention_moderator
 from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
 from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
@@ -39,6 +40,7 @@ class OnMessage:
             await verify_post(client, message, config)
 
         await Update.handle(client, message, config)
+        await log_message(client, message, config)
 
         if not message.content or not message.content.startswith(prefix):
             return
