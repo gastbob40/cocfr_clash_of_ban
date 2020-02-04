@@ -9,7 +9,8 @@ async def log_message(client: discord.Client, message: discord.Message, config):
         icon_url=message.author.avatar_url,
         name=f'{message.author.name}#{message.author.discriminator} ({message.author.id})'
     ) \
-        .set_thumbnail(url=message.author.avatar_url)
+        .set_thumbnail(url=message.author.avatar_url) \
+        .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
 
     if message.content:
         embed.add_field(

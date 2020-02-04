@@ -2,6 +2,7 @@ import discord
 
 from src.events_handler.on_member_join.on_member_join import OnMemberJoin
 from src.events_handler.on_message.on_message import OnMessage
+from src.events_handler.on_message_delete.on_message_delete import OnMessageDelete
 from src.events_handler.on_message_edit.on_message_edit import OnMessageEdit
 from src.events_handler.on_reaction_add.on_reaction_add import OnReactionAdd
 
@@ -25,5 +26,9 @@ class EventsHandler:
         await OnReactionAdd.handle(client, payload)
 
     @staticmethod
-    async def handle_on_message_edit(before: discord.Message, after: discord.Message):
-        await OnMessageEdit.handle(before, after)
+    async def handle_on_message_edit(client: discord.Client, before: discord.Message, after: discord.Message):
+        await OnMessageEdit.handle(client, before, after)
+
+    @staticmethod
+    async def handle_on_message_delete(client: discord.Client, message: discord.Message):
+        await OnMessageDelete.handle(client, message)

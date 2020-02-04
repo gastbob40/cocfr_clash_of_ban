@@ -30,6 +30,11 @@ async def on_raw_reaction_add(payload):
 
 @client.event
 async def on_message_edit(before, after):
-    await EventsHandler.handle_on_message_edit(before, after)
+    await EventsHandler.handle_on_message_edit(client, before, after)
+
+
+@client.event
+async def on_message_delete(message):
+    await EventsHandler.handle_on_message_delete(client, message)
 
 client.run(data['bot']['token'])
