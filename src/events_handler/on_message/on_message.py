@@ -5,6 +5,7 @@ import yaml
 
 from src.events_handler.on_message.miscs.change_nick import change_nick
 from src.events_handler.on_message.miscs.commands_list import commands_list
+from src.events_handler.on_message.miscs.donation_ask import donation_ask
 from src.events_handler.on_message.miscs.mention_moderator import mention_moderator
 from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
 from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
@@ -68,6 +69,8 @@ class OnMessage:
             await commands_list(client, message, args, config)
         elif command in ['cn', 'change_nick']:
             await change_nick(client, message, args, config)
+        elif command in ['don', 'donation']:
+            await donation_ask(client, message, args, config)
 
         else:
             with open("src/_data/custom_commands.yml", 'r') as stream:
