@@ -11,6 +11,8 @@ from src.events_handler.on_message.miscs.mention_moderator import mention_modera
 from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
 from src.events_handler.on_message.moderation.unbantemp_member import unbantemp_member
 from src.events_handler.on_message.moderation.user_information import user_information
+from src.events_handler.on_message.moderation.view_bantemps import view_bantemps
+from src.events_handler.on_message.moderation.view_warns import view_warns
 from src.events_handler.on_message.post_restriction.verify_post import verify_post
 from src.events_handler.on_message.moderation.warn_member import warn_member
 from src.events_handler.on_message.post_restriction.reinit_restriction import reinit_restriction
@@ -67,6 +69,10 @@ class OnMessage:
             await reinit_restriction(client, message, args, config)
         elif command in ['ui']:
             await user_information(client, message, args, config)
+        elif command in ['ia']:
+            await view_warns(client, message, args, config)
+        elif command in ['ib']:
+            await view_bantemps(client, message, args, config)
 
         # Public command
         elif command in ['co', 'commandes']:
