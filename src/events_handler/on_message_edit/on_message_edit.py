@@ -32,6 +32,8 @@ class OnMessageEdit:
         ) \
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
 
+        embed.description = f"Message envoyé dans le salon {before.channel.mention}."
+
         await after.guild.get_channel(config['channels']['log_messages']).send(
             embed=embed
         )

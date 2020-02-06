@@ -40,7 +40,9 @@ class OnMessage:
             await verify_post(client, message, config)
 
         await Update.handle(client, message, config)
-        await log_message(client, message, config)
+
+        # Log all message posted
+        # await log_message(client, message, config)
 
         if not message.content or not message.content.startswith(prefix):
             return

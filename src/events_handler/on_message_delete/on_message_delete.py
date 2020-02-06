@@ -6,7 +6,7 @@ class OnMessageDelete:
 
     @staticmethod
     async def handle(client: discord.Client, message: discord.Message):
-        if message.guild.id != 278653494846685186:  # or message.author.id == 309653542354944000:
+        if message.guild.id != 278653494846685186 or message.author.id == 309653542354944000:
             return
 
         if message.author.bot or not message.content:
@@ -26,6 +26,8 @@ class OnMessageDelete:
             inline=False
         ) \
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
+
+        embed.description = f"Message envoyé dans le salon {message.channel.mention}."
 
         await message.guild.get_channel(config['channels']['log_messages']).send(
             embed=embed
