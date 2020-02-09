@@ -13,7 +13,7 @@ async def mention_moderator(client: discord.Client, message: discord.Message, co
             if not archer_role in message.author.roles:
                 return await message.channel.send(
                     embed=EmbedsManager.error_embed(
-                        f"Erreur, il faut être niveau 5 (soit {archer_role.name}) afin de mentionner un modérateur.\n"
+                        f"Erreur, il faut être niveau 7 (soit {archer_role.name}) afin de mentionner un modérateur.\n"
                         f"Vous pouvez cependant vous adresser à un modérateur connecté."
                     )
                         .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')

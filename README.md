@@ -2,6 +2,7 @@
 
 ![Discord](https://img.shields.io/badge/Discord-project-brightgreen)
 ![python](https://img.shields.io/badge/Language-Python-blueviolet)
+![version](https://img.shields.io/badge/Version-2.1.1-orange)
 
 ## Getting Started
 
