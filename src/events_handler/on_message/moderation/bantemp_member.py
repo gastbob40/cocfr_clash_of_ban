@@ -3,6 +3,7 @@ from typing import List
 
 import discord
 import yaml
+import math
 
 from src.models.role import Role
 from src.models.temp_ban import TempBan
@@ -46,7 +47,13 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
     bantemp.moderator_id = message.author.id
 
     if args[0].isdigit():
-        delta = f'{int(args[0])} heure(s)'
+        if int(args[0]) < 24:
+            delta = f'{int(args[0])} heure(s)'
+        elif int(args[0]) % 24 == 0:
+            delta = f'{int(args[0]) / 24} jour(s)'
+        else:
+            delta = f'{math.floor(int(args[0]) / 24)} jour(s) et {int(args[0]) % 24} heure(s)'
+
         bantemp.end_time += timedelta(hours=int(args[0]))
 
     elif args[0] and args[0][-1] == 'd' and args[0][:-1].isdigit():

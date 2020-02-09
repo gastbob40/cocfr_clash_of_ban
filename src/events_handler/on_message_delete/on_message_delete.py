@@ -6,6 +6,9 @@ class OnMessageDelete:
 
     @staticmethod
     async def handle(client: discord.Client, message: discord.Message):
+        if not message.guild:
+            return
+
         if message.guild.id != 278653494846685186 or message.author.id == 309653542354944000:
             return
 

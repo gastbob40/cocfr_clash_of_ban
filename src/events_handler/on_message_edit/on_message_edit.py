@@ -6,6 +6,8 @@ class OnMessageEdit:
 
     @staticmethod
     async def handle(client: discord.Client, before: discord.Message, after: discord.Message):
+        if not before.guild:
+            return
         if before.guild.id != 278653494846685186 or after.author.id == 309653542354944000:
             return
 
