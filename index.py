@@ -10,7 +10,7 @@ with open("run/config/config.yml", 'r') as stream:
 
 @client.event
 async def on_ready():
-    EventsHandler.handle_on_ready(client)
+    await EventsHandler.handle_on_ready(client)
 
 
 @client.event

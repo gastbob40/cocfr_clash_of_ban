@@ -5,6 +5,7 @@ from src.events_handler.on_message.on_message import OnMessage
 from src.events_handler.on_message_delete.on_message_delete import OnMessageDelete
 from src.events_handler.on_message_edit.on_message_edit import OnMessageEdit
 from src.events_handler.on_reaction_add.on_reaction_add import OnReactionAdd
+from src.events_handler.on_ready.on_ready import OnReady
 
 
 class EventsHandler:
@@ -14,8 +15,8 @@ class EventsHandler:
         await OnMessage.handle(client, message)
 
     @staticmethod
-    def handle_on_ready(client: discord.Client):
-        print('We have logged in as {0.user}'.format(client))
+    async def handle_on_ready(client: discord.Client):
+        await OnReady.handle(client)
 
     @staticmethod
     async def handle_on_member_join(client: discord.Client, member: discord.Member):
