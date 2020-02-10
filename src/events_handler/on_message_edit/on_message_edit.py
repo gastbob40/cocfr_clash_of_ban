@@ -24,7 +24,7 @@ class OnMessageEdit:
             .set_thumbnail(url=before.author.avatar_url) \
             .add_field(
             name="Contenue de l'ancien message :",
-            value=after.content,
+            value=before.content,
             inline=False
         ) \
             .add_field(
