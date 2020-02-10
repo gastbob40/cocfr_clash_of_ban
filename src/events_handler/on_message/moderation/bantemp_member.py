@@ -1,9 +1,9 @@
+import math
 from datetime import timedelta
 from typing import List
 
 import discord
 import yaml
-import math
 
 from src.models.role import Role
 from src.models.temp_ban import TempBan
@@ -102,16 +102,19 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
             .add_field(name="Auteur :", value=message.author.display_name, inline=True)
     )
 
-    await target.send(
-        embed=EmbedsManager.sanction_embed(
-            f"Vous venez de subir un bannissement temporaire de {delta}.",
-            f"Vous venez d'être bantemp pour : `{bantemp.reason}`.\n\n"
-            f"Sachez que plusieurs bans temporaires conduisent à un ban définitif.")
-            .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
+    try:
+        await target.send(
+            embed=EmbedsManager.sanction_embed(
+                f"Vous venez de subir un bannissement temporaire de {delta}.",
+                f"Vous venez d'être bantemp pour : `{bantemp.reason}`.\n\n"
+                f"Sachez que plusieurs bans temporaires conduisent à un ban définitif.")
+                .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
 
-            .add_field(name="Durée :", value=delta, inline=True)
-            .add_field(name="Auteur :", value=message.author.display_name, inline=True)
-    )
+                .add_field(name="Durée :", value=delta, inline=True)
+                .add_field(name="Auteur :", value=message.author.display_name, inline=True)
+        )
+    except:
+        pass
 
     # Add roles
 
