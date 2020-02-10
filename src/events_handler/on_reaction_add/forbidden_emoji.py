@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 import discord, math
 import yaml
 
@@ -55,6 +57,7 @@ async def forbidden_emoji(client: discord.Client, payload: discord.RawReactionAc
     bantemp.user_id = user.id
     bantemp.moderator_id = client.user.id
     bantemp.reason = "BanTemp suite à une réaction inappropriée."
+    bantemp.end_time += timedelta(hours=time)
     bantemp.save()
 
     # Change permissions
