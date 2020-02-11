@@ -73,8 +73,10 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
         )
 
     bantemp.reason = ' '.join(args)
-
     bantemp.save()
+
+    _, res = api_manager.get_data('temp-bans', user_id=target.id)
+    nb_bt = len(res)
 
     await message.channel.send(
         embed=EmbedsManager.sanction_embed(
@@ -88,8 +90,10 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
                        inline=False)
             .add_field(name="Raison :", value=bantemp.reason, inline=True)
             .add_field(name="Durée :", value=delta, inline=True)
+            .add_field(name="Nombre :", value=nb_bt, inline=True)
             .set_image(
-            url='https://cdn.discordapp.com/attachments/377179445640822784/663478346763599872/photostudio_15295854416791.png'
+            url='https://cdn.discordapp.com/attachments/377179445640822784/663478346763599872'
+                '/photostudio_15295854416791.png'
         )
     )
 
