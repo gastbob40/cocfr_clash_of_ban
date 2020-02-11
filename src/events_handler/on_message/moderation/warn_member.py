@@ -42,13 +42,16 @@ async def warn_member(client: discord.Client, message: discord.Message, args: Li
     warn.user_id = target.id
     warn.moderator_id = message.author.id
     warn.reason = ' '.join(args)
-
     warn.save()
+
+    _, res = api_manager.get_data('warns', user_id=target.id)
+    nb_warns = len(res)
 
     await message.channel.send(
         embed=EmbedsManager.sanction_embed(
             f"Avertissement du membre {target.display_name}.",
             f"Vous venez de l'avertir pour : `{warn.reason}`.")
+            .add_field(name="Nombre :", value=nb_warns, inline=False)
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
     )
 
