@@ -6,6 +6,7 @@ import yaml
 from src.events_handler.on_message.miscs.change_nick import change_nick
 from src.events_handler.on_message.miscs.commands_list import commands_list
 from src.events_handler.on_message.miscs.donation_ask import donation_ask
+from src.events_handler.on_message.miscs.get_top import get_top
 from src.events_handler.on_message.miscs.log_message import log_message
 from src.events_handler.on_message.miscs.mention_moderator import mention_moderator
 from src.events_handler.on_message.moderation.bantemp_member import bantemp_member
@@ -73,6 +74,8 @@ class OnMessage:
             await view_warns(client, message, args, config)
         elif command in ['ib']:
             await view_bantemps(client, message, args, config)
+        elif command in ['top']:
+            await get_top(client, message, args, config)
 
         # Public command
         elif command in ['co', 'commandes']:
