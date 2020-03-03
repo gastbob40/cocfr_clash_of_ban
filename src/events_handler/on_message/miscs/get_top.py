@@ -57,13 +57,17 @@ async def get_top(client: discord.Client, message: discord.Message, args: List[s
     records = records[:10]
 
     for index, record in enumerate(records):
+        content = record['content']
+        if len(content) > 1024:
+            content = record['content'][:1020] + '...'
+
         embed = discord.Embed(color=0xff0000) \
             .set_author(
             name=f"Message {index + 1}."
         ) \
             .add_field(
             name="Contenu du message",
-            value=record['content'],
+            value=content,
             inline=False
         ) \
             .add_field(
