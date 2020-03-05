@@ -16,16 +16,6 @@ async def forbidden_emoji(client: discord.Client, payload: discord.RawReactionAc
     time = 48
     delta = "2 jours"
 
-    await client.get_channel(config['channels']['moderator']).send(
-        embed=EmbedsManager.sanction_embed(
-            f"{user.name}#{user.discriminator} vient d'utiliser un émoji interdit.",
-            f"Le joueur à été averti en message privé, la réaction a été supprimé et il a été bantemp {time} heures."
-        )
-            .add_field(name='Emoji', value=payload.emoji, inline=True)
-            .add_field(name='Salon', value=channel.mention, inline=True)
-            .add_field(name="Lien", value=f"[{message.jump_url}]({message.jump_url})", inline=False)
-            .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
-    )
 
     await client.get_channel(config['channels']['log_reactions']).send(
         embed=EmbedsManager.sanction_embed(
