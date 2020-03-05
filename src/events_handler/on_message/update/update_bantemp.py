@@ -27,13 +27,6 @@ async def update_bantemp(client: discord.Client, message: discord.Message, bante
         .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
     )
 
-    await client.get_channel(config['channels']['moderator']).send(
-        embed=EmbedsManager.sanction_embed(
-            f"Le bantemp de {target.display_name} vient de finir."
-        )
-            .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
-    )
-
     try:
         await target.send(
             embed=EmbedsManager.sanction_embed(
