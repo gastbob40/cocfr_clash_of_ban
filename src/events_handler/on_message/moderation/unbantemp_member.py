@@ -75,12 +75,15 @@ async def unbantemp_member(client: discord.Client, message: discord.Message, arg
             .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
     )
 
-    await target.send(
-        embed=EmbedsManager.sanction_embed(
-            f"{message.author.display_name} vient de retirer votre bantemp."
+    try:
+        await target.send(
+            embed=EmbedsManager.sanction_embed(
+                f"{message.author.display_name} vient de retirer votre bantemp."
+            )
+                .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
         )
-            .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
-    )
+    except:
+        pass
 
     # Update data
 
