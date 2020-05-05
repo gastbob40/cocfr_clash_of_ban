@@ -24,6 +24,14 @@ async def on_member_join(member):
 
 
 @client.event
+async def on_member_remove(member):
+    member_count = str(format(len(member.guild.members), ',').replace(',', ' '))
+    member_str = f"{member_count} Membres 🗃️"
+
+    await client.get_channel(706845739128586340).edit(name=member_str)
+
+
+@client.event
 async def on_raw_reaction_add(payload):
     await EventsHandler.handle_on_reaction_add(client, payload)
 

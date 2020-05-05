@@ -16,5 +16,10 @@ class OnMemberJoin:
         # Check if the user is a banned member
         await banned_come_back(client, member, config)
 
+        member_count = str(format(len(member.guild.members), ',').replace(',', ' '))
+        member_str = f"{member_count} Membres 🗃️"
+
+        await client.get_channel(706845739128586340).edit(name=member_str)
+
         # Log Invite
         await log_invite(client, member, config)
