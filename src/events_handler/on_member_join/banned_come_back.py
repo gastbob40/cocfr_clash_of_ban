@@ -54,11 +54,13 @@ async def banned_come_back(client: discord.Client, member: discord.Member, confi
 
     for channel in member.guild.channels:
         try:
-            if member.permissions_in(channel).read_messages:
-                await channel.set_permissions(member,
-                                              send_messages=False)
-            if member.permissions_in(channel).connect:
-                await channel.set_permissions(member,
-                                              connect=False)
+            if isinstance(channel, discord.TextChannel):
+                if member.permissions_in(channel).read_messages:
+                    await channel.set_permissions(member,
+                                                  send_messages=False)
+            elif isinstance(channel, discord.VoiceChannel):
+                if member.permissions_in(channel).connect:
+                    await channel.set_permissions(member,
+                                                  connect=False)
         except:
             pass

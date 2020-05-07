@@ -96,9 +96,15 @@ async def unbantemp_member(client: discord.Client, message: discord.Message, arg
     # Reset permission
 
     for channel in message.guild.channels:
+
         try:
-            if not target.permissions_in(channel).send_messages or not target.permissions_in(channel).connect:
-                await channel.set_permissions(target,
-                                              overwrite=None)
+            if isinstance(channel, discord.TextChannel):
+                if not target.permissions_in(channel).send_messages:
+                    await channel.set_permissions(target,
+                                                  overwrite=None)
+            elif isinstance(channel, discord.VoiceChannel):
+                if not target.permissions_in(channel).connect:
+                    await channel.set_permissions(target,
+                                                  overwrite=None)
         except:
             pass

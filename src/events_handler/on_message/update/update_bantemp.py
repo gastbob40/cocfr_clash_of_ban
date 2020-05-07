@@ -24,7 +24,7 @@ async def update_bantemp(client: discord.Client, message: discord.Message, bante
         embed=EmbedsManager.sanction_embed(
             f"Le bantemp de {target.display_name} vient de finir."
         )
-        .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
+            .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
     )
 
     try:
@@ -32,7 +32,7 @@ async def update_bantemp(client: discord.Client, message: discord.Message, bante
             embed=EmbedsManager.sanction_embed(
                 f"Votre bantemp vient de finir."
             )
-            .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
+                .set_footer(icon_url=client.user.avatar_url, text='Made By Gastbob40')
         )
     except:
         pass
@@ -41,8 +41,13 @@ async def update_bantemp(client: discord.Client, message: discord.Message, bante
 
     for channel in message.guild.channels:
         try:
-            if not target.permissions_in(channel).send_messages or not target.permissions_in(channel).connect:
-                await channel.set_permissions(target,
-                                              overwrite=None)
+            if isinstance(channel, discord.TextChannel):
+                if not target.permissions_in(channel).send_messages:
+                    await channel.set_permissions(target,
+                                                  overwrite=None)
+            elif isinstance(channel, discord.VoiceChannel):
+                if not target.permissions_in(channel).connect:
+                    await channel.set_permissions(target,
+                                                  overwrite=None)
         except:
             pass
