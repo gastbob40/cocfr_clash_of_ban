@@ -133,11 +133,13 @@ async def bantemp_member(client: discord.Client, message: discord.Message, args:
 
     for channel in message.guild.channels:
         try:
-            if target.permissions_in(channel).read_messages:
-                await channel.set_permissions(target,
-                                              send_messages=False)
-            if target.permissions_in(channel).connect:
-                await channel.set_permissions(target,
-                                              connect=False)
+            if isinstance(channel, discord.TextChannel):
+                if target.permissions_in(channel).read_messages:
+                    await channel.set_permissions(target,
+                                                  send_messages=False)
+            elif isinstance(channel, discord.VoiceChannel):
+                if target.permissions_in(channel).connect:
+                    await channel.set_permissions(target,
+                                                  connect=False)
         except:
-            pass
+            print("Cannot do magic in " + channel.name)
