@@ -8,7 +8,7 @@ from src.utils.embeds_manager import EmbedsManager
 
 
 async def update_bantemp(client: discord.Client, message: discord.Message, bantemp: TempBan, roles: List[Role], config):
-    target: discord.Member = message.guild.get_member(bantemp.user_id)
+    target: discord.Member = await message.guild.fetch_member(bantemp.user_id)
     bantemp.is_active = False
 
     if not target:
