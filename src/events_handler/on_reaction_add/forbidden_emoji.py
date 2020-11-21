@@ -9,13 +9,12 @@ from src.utils.embeds_manager import EmbedsManager
 
 
 async def forbidden_emoji(client: discord.Client, payload: discord.RawReactionActionEvent, config):
-    user = client.get_guild(payload.guild_id).get_member(payload.user_id)
+    user = await client.get_guild(payload.guild_id).fetch_member(payload.user_id)
     channel = client.get_channel(payload.channel_id)
     message = await channel.fetch_message(payload.message_id)
 
     time = 48
     delta = "2 jours"
-
 
     await client.get_channel(config['channels']['log_reactions']).send(
         embed=EmbedsManager.sanction_embed(
